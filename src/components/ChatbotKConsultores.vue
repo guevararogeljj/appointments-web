@@ -4,7 +4,7 @@
       <span class="bot-emoji" aria-label="bot">🤖</span>
       <span class="font-weight-bold ms-2">Chatbot KConsultores</span>
     </div>
-    <div class="chat-body">
+  <div class="chat-body" ref="chatBodyRef">
       <div
         v-for="(msg, idx) in messages"
         :key="idx"
@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue';
+import { ref, defineComponent, nextTick } from 'vue';
 import { AxiosChatbotKConsultoresService } from '../infrastructure/chat/AxiosChatbotKConsultoresService';
 import axios from 'axios';
 
@@ -48,8 +48,9 @@ export default defineComponent({
     const messages = ref([
       { from: 'bot', text: '¡Hola! Soy tu asesor virtual de KConsultores, ¿cómo puedo ayudarte?' }
     ]);
-    const loading = ref(false);
-    const chatService = new AxiosChatbotKConsultoresService(axios);
+  const loading = ref(false);
+  const chatService = new AxiosChatbotKConsultoresService(axios);
+  const chatBodyRef = ref<HTMLElement | null>(null);
 
     // Alternancia por tipo de mensaje
     function botColorIndex(idx: number) {
@@ -72,18 +73,30 @@ export default defineComponent({
         const userMsg = input.value;
         messages.value.push({ from: 'user', text: userMsg });
         input.value = '';
+        await nextTick();
+        scrollToBottom();
         loading.value = true;
         try {
           const reply = await chatService.sendMessage(userMsg);
           messages.value.push({ from: 'bot', text: reply });
+          await nextTick();
+          scrollToBottom();
         } catch (e) {
           messages.value.push({ from: 'bot', text: 'Ocurrió un error al contactar al servicio.' });
+          await nextTick();
+          scrollToBottom();
         } finally {
           loading.value = false;
         }
       }
     }
-    return { input, sendMessage, messages, loading, botColorIndex, userColorIndex };
+
+    function scrollToBottom() {
+      if (chatBodyRef.value) {
+        chatBodyRef.value.scrollTop = chatBodyRef.value.scrollHeight;
+      }
+    }
+  return { input, sendMessage, messages, loading, botColorIndex, userColorIndex, chatBodyRef };
   }
 });
 </script>
@@ -138,6 +151,9 @@ export default defineComponent({
   box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10);
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  max-height: 320px;
+  min-height: 120px;
 }
 
 .message {
