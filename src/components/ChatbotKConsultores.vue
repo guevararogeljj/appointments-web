@@ -166,7 +166,6 @@ export default defineComponent({
   word-break: break-word;
 }
 
-/* Bot alterna entre rojo y rojo oscuro (Recibidos) */
 .k-message {
   background:#800080;
   color: white;
