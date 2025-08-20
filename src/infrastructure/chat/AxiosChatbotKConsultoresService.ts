@@ -20,3 +20,4 @@ export class AxiosChatbotKConsultoresService implements IChatbotKConsultoresServ
       return response.data.reply;
   }
 }
+
