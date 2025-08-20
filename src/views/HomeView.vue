@@ -112,7 +112,7 @@ export default defineComponent({
 const setupSignalR = () => {
   connection = new signalR.HubConnectionBuilder()
     .withUrl('https://localhost:7001/chatHub', {
-      accessTokenFactory: () => localStorage.getItem('jwtToken') || '',
+      accessTokenFactory: () => localStorage.getItem('jwtToken') ?? '',
     })
     .withAutomaticReconnect()
     .build();
@@ -122,7 +122,7 @@ const setupSignalR = () => {
       messages.value.push({
         id: '', // ID will be assigned by backend
         chatRoomId,
-        sender: { id: senderId, userName: '', email: '', firstName: '', lastName: '' }, // Populate full user data if needed
+        sender: { id: senderId, userName: '', email: '', firstName: '', lastName: '' },
         receiver: { id: receiverId, userName: '', email: '', firstName: '', lastName: '' },
         message,
         timestamp,
