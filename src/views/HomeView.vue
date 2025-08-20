@@ -108,29 +108,31 @@ export default defineComponent({
       }
     };
 
-    const setupSignalR = () => {
-      connection = new signalR.HubConnectionBuilder()
-        .withUrl('https://localhost:7001/chatHub', {
-          accessTokenFactory: () => localStorage.getItem('jwtToken'),
-        })
-        .withAutomaticReconnect()
-        .build();
+   // ...existing code...
+const setupSignalR = () => {
+  connection = new signalR.HubConnectionBuilder()
+    .withUrl('https://localhost:7001/chatHub', {
+      accessTokenFactory: () => localStorage.getItem('jwtToken') || '',
+    })
+    .withAutomaticReconnect()
+    .build();
 
-      connection.on('ReceiveMessage', (chatRoomId: string, senderId: string, receiverId: string, message: string, timestamp: string) => {
-        if (selectedChatRoom.value && chatRoomId === selectedChatRoom.value.id) {
-          messages.value.push({
-            id: '', // ID will be assigned by backend
-            chatRoomId,
-            sender: { id: senderId, userName: '', email: '', firstName: '', lastName: '' }, // Populate full user data if needed
-            receiver: { id: receiverId, userName: '', email: '', firstName: '', lastName: '' },
-            message,
-            timestamp,
-          });
-        }
+  connection.on('ReceiveMessage', (chatRoomId: string, senderId: string, receiverId: string, message: string, timestamp: string) => {
+    if (selectedChatRoom.value && chatRoomId === selectedChatRoom.value.id) {
+      messages.value.push({
+        id: '', // ID will be assigned by backend
+        chatRoomId,
+        sender: { id: senderId, userName: '', email: '', firstName: '', lastName: '' }, // Populate full user data if needed
+        receiver: { id: receiverId, userName: '', email: '', firstName: '', lastName: '' },
+        message,
+        timestamp,
       });
+    }
+  });
 
-      connection.start().catch(err => console.error('SignalR Connection Error: ', err));
-    };
+  connection.start().catch(err => console.error('SignalR Connection Error: ', err));
+};
+// ...existing code...
 
     const startChat = async (user: User) => {
       try {
