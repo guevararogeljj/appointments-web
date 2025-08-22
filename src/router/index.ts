@@ -38,6 +38,11 @@ const router = createRouter({
       name: 'ChatbotKConsultoresDetail',
       component: () => import('../views/ChatbotKConsultoresDetail.vue'),
     },
+    {
+      path: '/chatbot-reto97',
+      name: 'ChatbotReto97Detail',
+      component: () => import('../views/ChatbotReto97Detail.vue')
+    },
   ],
 })
 
