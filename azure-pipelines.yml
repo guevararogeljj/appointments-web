@@ -1,0 +1,30 @@
+steps:
+  - task: UseNode@1
+    inputs:
+      version: '22.12.0'
+    displayName: 'Instalar Node.js'
+
+  - script: rm -rf node_modules package-lock.json
+    displayName: 'Limpiar node_modules y package-lock.json'
+
+  - script: npm install vite@latest @vitejs/plugin-vue@latest --save-dev
+    displayName: 'Actualizar Vite y plugin-vue'
+
+  - script: rm -rf node_modules package-lock.json
+    displayName: 'Eliminar node_modules y package-lock.json'
+
+  - script: npm install
+    displayName: 'Instalar dependencias'
+
+  - script: npm cache clean --force
+    displayName: 'Limpiar caché de npm'
+
+  - script: npm run build
+    displayName: 'Construir proyecto'
+
+  - task: AzureStaticWebApp@0
+    inputs:
+      app_location: '/'
+      output_location: 'dist'
+      azure_static_web_apps_api_token: '$(deployment_token)'
+    displayName: 'Desplegar a Azure Static Web Apps'
