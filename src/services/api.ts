@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5104/api/v1',
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'https://appointmentsgateway-egfpavfabyehg0dp.mexicocentral-01.azurewebsites.net/api/v1',
   headers: {
     'Content-Type': 'application/json',
     'XApiKey': 'pgH7QzFHJx4w46fI~5Uzi4RvtTwlEXp',
