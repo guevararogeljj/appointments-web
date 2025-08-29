@@ -27,4 +27,4 @@ steps:
       app_location: '/'
       output_location: 'dist'
       azure_static_web_apps_api_token: '$(deployment_token)'
-    displayName: 'Desplegar a Azure Static Web Apps'
+      displayName: 'Desplegar a Azure Static Web Apps'
