@@ -134,6 +134,8 @@ export default defineComponent({
   margin: 0 auto;
 }
 
+/* ...existing code... */
+
 @media (max-width: 600px) {
   .chatbot-kconsultores-container {
     padding: 10px 4px 6px 4px;
@@ -165,6 +167,7 @@ export default defineComponent({
   .chat-input {
     font-size: 0.95rem;
   }
+}
 
 .chat-header {
   display: flex;
