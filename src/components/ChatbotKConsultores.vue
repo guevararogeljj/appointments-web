@@ -128,6 +128,42 @@ export default defineComponent({
   flex-direction: column;
   gap: 8px;
   border: 2px solid var(--kc-purple-intense);
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .chatbot-kconsultores-container {
+    padding: 10px 4px 6px 4px;
+    border-radius: 12px;
+    max-width: 100vw;
+    min-width: 0;
+  }
+  .chat-header {
+    font-size: 1rem;
+  }
+  .bot-emoji {
+    font-size: 1.2rem;
+  }
+  .chat-body {
+    padding: 4px 2px;
+    max-height: 220px;
+    min-height: 80px;
+    font-size: 0.92rem;
+  }
+  .message {
+    font-size: 0.92rem;
+    padding: 6px 8px;
+    max-width: 98%;
+  }
+  .chat-footer {
+    padding: 4px 2px;
+    gap: 2px;
+  }
+  .chat-input {
+    font-size: 0.95rem;
+  }
 }
 
 .chat-header {
