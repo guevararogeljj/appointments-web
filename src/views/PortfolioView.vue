@@ -36,6 +36,17 @@
             </v-card-text>
           </v-card>
         </v-col>
+               <v-col cols="12" md="6" class="mb-4">
+          <v-card class="elevation-4 rounded-lg h-100" style="background:rgba(245,246,250,0.95);">
+            <v-card-title class="font-weight-bold" style="color:#1976d2;">Monitor</v-card-title>
+            <v-card-text>
+              <div class="mb-2">Ejemplo de sistemas distribuidos.</div>
+
+              <monitor />
+              <v-btn color="primary" variant="tonal" href="#" disabled>Próximamente</v-btn>
+            </v-card-text>
+          </v-card>
+        </v-col>
       </v-row>
       <div class="text-h5 font-weight-bold mt-8 mb-4 text-center" style="color:#1976d2; letter-spacing:1px;">Chats
         Destacados</div>
@@ -91,6 +102,7 @@
 import ChatbotAI from '../components/ChatbotAI.vue';
 import ChatbotKConsultores from '../components/ChatbotKConsultores.vue';
 import ChatbotReto97 from '../components/ChatbotReto97.vue';
+import Monitor from '../components/Monitor.vue';
 </script>
 
 <style scoped>

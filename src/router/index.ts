@@ -43,6 +43,11 @@ const router = createRouter({
       name: 'ChatbotReto97Detail',
       component: () => import('../views/ChatbotReto97Detail.vue')
     },
+    {
+      path: '/monitor-guid',
+      name: 'MonitorGuidDetail',
+      component: () => import('../views/MonitorDetail.vue')
+    },
   ],
 })
 
